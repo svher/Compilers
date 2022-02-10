@@ -112,7 +112,7 @@ int commentStartCount = 0;
   */ 
 
 "\n" {adjust(); EM_newline(); continue;}
-<INITIAL>(" "|"\t")+ {adjust();}
+<INITIAL>(" "|"\t"|"\r")+ {adjust();}
 
 <INITIAL>while {adjust(); return WHILE;}
 <INITIAL>for {adjust(); return FOR;}
