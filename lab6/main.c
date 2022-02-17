@@ -129,7 +129,7 @@ int main(int argc, string *argv)
    if (!absyn_root)
      return 1;
      
-#if 0
+#if 1
    pr_exp(out, absyn_root, 0); /* print absyn data structure */
    fprintf(out, "\n");
 #endif

@@ -1,3 +1,4 @@
+all: tiger-compiler
 CC=gcc
 CFLAGS=-g -c -Wno-pointer-to-int-cast -Wno-int-to-pointer-cast 
 
