@@ -104,6 +104,7 @@ static G_table makeLiveMap(G_nodeList flowNodes) {
 				Temp_tempList in = use;
 				Temp_tempList t;
 				for(t = out; t; t = t->tail) {
+                    // 所有不在 use 和 def 的 out
 					if(!Temp_inTempList(t->head, def) && !Temp_inTempList(t->head, use)) {
 						in = Temp_TempList(t->head, in);
 					}
@@ -193,7 +194,9 @@ struct Live_graph Live_liveness(G_graph flow) {
 		Live_additionalInfo p = calloc(1, sizeof(*p));
 		p->index = nodeIndex;
 		p->color = tl->head;
-		p->degree = 10000;    // precolored nodes have infinite degree
+        // precolored nodes have infinite degree
+        // thus cannot be simplified
+		p->degree = 10000;
 		G_enter(additionalInfoTable, newNode, p);
 		setNodeOfTemp(tl->head, newNode);
 		++nodeIndex;

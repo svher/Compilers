@@ -129,6 +129,7 @@ static T_exp unEx(Tr_exp e) {
 	assert(0);
 }
 
+// Tr_exp 不需要返回值
 static T_stm unNx(Tr_exp e) {
 	switch(e->kind) {
 		case Tr_ex: {

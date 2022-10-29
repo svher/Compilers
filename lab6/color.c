@@ -151,6 +151,7 @@ static bool george(G_node u, G_node v) {
 	for(nl = adjacent(v); nl; nl = nl->tail) {
 		G_node t = nl->head; 
 		Live_additionalInfo t_info = Live_getAdditionalInfo(additionalNodeTable, t);
+        // t_info->color != NULL -> t is also conflict with u
 		if(!(t_info->degree < K || t_info->color != NULL || adjSet[t_info->index][u_info->index])) {
 			return FALSE;
 		}
@@ -162,6 +163,7 @@ static bool briggs(G_node u, G_node v) {
 	G_nodeList adju = adjacent(u);
 	G_nodeList nodes = adju;
 	G_nodeList nl;
+    // 求节点 u 和 v 相邻节点的并集
 	for(nl = adjacent(v); nl; nl = nl->tail) {
 		if(!G_inNodeList(nl->head, adju)) {
 			nodes = G_NodeList(nl->head, nodes);

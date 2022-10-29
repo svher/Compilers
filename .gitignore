@@ -1,0 +1,5 @@
+*.o
+y.*
+tiger-compiler
+lex.yy.c
+*.s

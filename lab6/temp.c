@@ -88,7 +88,11 @@ string Temp_look(Temp_map m, Temp_temp t) {
   s = TAB_look(m->tab, t);
   if (s) return s;
   else if (m->under) return Temp_look(m->under, t);
-  else return NULL;
+  else {
+      char buf[100];
+      sprintf(buf, "t_%d", t->num);
+      return String(buf);
+  }
 }
 
 Temp_tempList Temp_TempList(Temp_temp h, Temp_tempList t) 

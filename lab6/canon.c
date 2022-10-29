@@ -160,6 +160,7 @@ static C_stmListList StmListList(T_stmList head, C_stmListList tail)
 }
  
 /* Go down a list looking for end of basic block */
+// return StmListList(stm, next(stms, stms->tail, done)
 static C_stmListList next(T_stmList prevstms, T_stmList stms, Temp_label done)
 {
   if (!stms) 
@@ -168,11 +169,11 @@ static C_stmListList next(T_stmList prevstms, T_stmList stms, Temp_label done)
 			  NULL), done);
   if (stms->head->kind == T_JUMP || stms->head->kind == T_CJUMP) {
     C_stmListList stmLists;
-    prevstms->tail = stms; 
+    prevstms->tail = stms;
     stmLists = mkBlocks(stms->tail, done);
     stms->tail = NULL;
     return stmLists;
-  } 
+  }
   else if (stms->head->kind == T_LABEL) {
     Temp_label lab = stms->head->u.LABEL;
     return next(prevstms, T_StmList(T_Jump(T_Name(lab), Temp_LabelList(lab, NULL)), 

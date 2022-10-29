@@ -220,6 +220,7 @@ static void munchStm(T_stm s) {
 					int i = dst->u.MEM->u.BINOP.right->u.CONST;
 					sprintf(as_buf, "movl `s1, %d(`s0)", i);
 					string as = String(as_buf);
+                    // e1 是内存 target， e2 是源
 					emit(AS_Oper(as, NULL, L(munchExp(e1), L(munchExp(e2), NULL)), NULL));
 				}
 				else if(dst->u.MEM->kind == T_BINOP

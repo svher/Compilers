@@ -81,6 +81,7 @@ F_frame F_newFrame(Temp_label name, U_boolList formals) {
 	F_accessList accListHead = NULL;
 	F_accessList accListTail = NULL;
 	int offset = F_wordSize * 2;
+    // ebp and return address
 	assert(offset == 8);    // in x86
 	int argCnt = 0;
 	for(; formals; formals = formals->tail) {
