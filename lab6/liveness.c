@@ -178,9 +178,9 @@ struct Live_graph Live_liveness(G_graph flow) {
 	G_nodeList flowNodes = G_nodes(flow);
 	G_table liveMap = makeLiveMap(flowNodes);
 
-	// make empty confilict graph
+	// make empty conflict graph
 	tempToNode = TAB_empty();
-	G_graph confilict = G_Graph();
+	G_graph conflict = G_Graph();
 	int precolorCnt = 0;
 	Temp_tempList tl;
 	for(tl = F_registers(); tl; tl = tl->tail) {
@@ -190,7 +190,7 @@ struct Live_graph Live_liveness(G_graph flow) {
 	int nodeIndex = 0;
 	for(tl = F_registers(); tl; tl = tl->tail) {
 		// assert F_registers are different between each other
-		G_node newNode= G_Node(confilict, tl->head);
+		G_node newNode= G_Node(conflict, tl->head);
 		Live_additionalInfo p = calloc(1, sizeof(*p));
 		p->index = nodeIndex;
 		p->color = tl->head;
@@ -209,7 +209,7 @@ struct Live_graph Live_liveness(G_graph flow) {
 		Temp_tempList tl;
 		for(tl = all; tl; tl = tl->tail) {
 			if(getNodeByTemp(tl->head) == NULL) {
-				G_node newNode= G_Node(confilict, tl->head);
+				G_node newNode= G_Node(conflict, tl->head);
 				Live_additionalInfo p = calloc(1, sizeof(*p));
 				p->index = nodeIndex;
 				G_enter(additionalInfoTable, newNode, p);
@@ -260,10 +260,12 @@ struct Live_graph Live_liveness(G_graph flow) {
 			Temp_tempList l;
 			if(isMove) {
 				for(l = live; l; l = l->tail) {
-					if(l->head != use->head) {
-						addEdge(adjSet, n_d, getNodeByTemp(l->head), additionalInfoTable);
-					}
-				}
+                    if (l->head != use->head) {
+                        addEdge(adjSet, n_d, getNodeByTemp(l->head), additionalInfoTable);
+                    }
+                }
+                // maybe we assert move command only have one def,
+                // so we needn't traverse defs here
 			}
 			else {
 				for(l = live; l; l = l->tail) {
@@ -277,7 +279,7 @@ struct Live_graph Live_liveness(G_graph flow) {
 	}
 	
 	struct Live_graph lg;
-	lg.graph = confilict;
+	lg.graph = conflict;
 	lg.moves = worklistMoves;
 	lg.adjSet = adjSet;
 	lg.table = additionalInfoTable;

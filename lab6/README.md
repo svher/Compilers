@@ -4,3 +4,11 @@
   
 完成指令选择、活跃分析、寄存器分配，最终实现一个可用的Tiger编译器  
 将lab5中 tiger.[lex,y], frame.h, x86frame.c, semant.[c,h],translate.[c,h]复制到lab6（cd lab6; ./copy_lab5.sh）  
+
+#### usage
+
+```bash
+tiger-compiler testcases/queens.tig
+# link with runtime library - initArray, stringEqual, etc.
+gcc testcases/queens.tig.s runtime.c -m32
+```

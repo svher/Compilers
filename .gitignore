@@ -3,3 +3,5 @@ y.*
 tiger-compiler
 lex.yy.c
 *.s
+.idea
+a.out
