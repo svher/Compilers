@@ -186,9 +186,9 @@ static G_node getAlias(G_node n) {
 		Live_additionalInfo n_info = Live_getAdditionalInfo(additionalNodeTable, n);
 		return getAlias(n_info->alias);
 	}
-	else {
-		return n;
-	}
+    // ide bug??
+    G_node n1 = n;
+    return n1;
 }
 
 static void combine(G_node u, G_node v) {
